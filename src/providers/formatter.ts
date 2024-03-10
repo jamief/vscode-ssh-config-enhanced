@@ -9,6 +9,17 @@ import type {
 import { Range, languages, window } from 'vscode'
 import { DOCUMENT_PROVIDER } from './utils'
 
+function stringDifference(str1: string, str2: string) {
+  let diff = ''
+  for (let i = 0; i < Math.max(str1.length, str2.length); i++) {
+    if (str1[i] !== str2[i]) {
+      diff += str1[i] || '' // Adds the character from str1 if it exists
+      diff += str2[i] || '' // Adds the character from str2 if it exists
+    }
+  }
+  return diff
+}
+
 /**
  * Provides formatting for SSH configuration documents.
  */
@@ -35,11 +46,7 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
     const text = document.getText()
     const formattedText = this.formatSshConfig(text)
 
-    console.log(text)
-    console.log(formattedText)
-
     if (text === formattedText) {
-      console.log('they are same')
       return
     }
 
