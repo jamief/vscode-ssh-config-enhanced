@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jamief/vscode-ssh-config-language-server"
+    "url": "https://github.com/jamief/vscode-ssh-config-enhanced"
   },
   "engines": {
     "vscode": "^1.83.0"
@@ -66,8 +66,8 @@
     ]
   },
   "scripts": {
-    "publish": "vsce publish --no-dependencies",
-    "vscode:prepublish": "pnpm run build",
+    "publish": "vsce package --no-dependencies",
+    "vscode:prepublish": "npm run build",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "eslint src"
@@ -75,7 +75,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.0",
     "@types/node": "~20.11.25",
-    "@types/vscode": "^1.87.0",
+    "@types/vscode": "^1.83.0",
     "eslint": "^8.57.0",
     "typescript": "5.2.2"
   }
