@@ -1,0 +1,82 @@
+{
+  "name": "vscode-ssh-config-enhanced",
+  "displayName": "SSH Config Enhanced",
+  "description": "SSH config editing enhanced, providing autocompletion, validation, include path intellisense and formatting",
+  "version": "1.0.0",
+  "publisher": "jamief",
+  "icon": "images/icon.png",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jamief/vscode-ssh-config-language-server"
+  },
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "extensionKind": [
+    "ui"
+  ],
+  "categories": [
+    "Formatters",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "remote development",
+    "remote",
+    "vscode ssh"
+  ],
+  "main": "./out/extension",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [
+    "onLanguage:ssh_config"
+  ],
+  "extensionDependencies": [
+    "ms-vscode-remote.remote-ssh"
+  ],
+  "contributes": {
+    "keybindings": [
+      {
+        "command": "extension.formatSshConfig",
+        "key": "ctrl+shift+f",
+        "when": "editorLangId == 'ssh_config'"
+      }
+    ],
+    "commands": [
+      {
+        "command": "ssh.openUserConfig",
+        "title": "SSH: Open User Configuration"
+      },
+      {
+        "command": "extension.formatSshConfig",
+        "title": "Format SSH Config"
+      }
+    ],
+    "grammars": [
+      {
+        "scopeName": "source.config.ssh.injection",
+        "path": "./syntaxes/ssh_config.tmLanguage.json",
+        "injectTo": [
+          "source.config.ssh"
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "publish": "vsce publish --no-dependencies",
+    "vscode:prepublish": "pnpm run build",
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.8.0",
+    "@types/node": "~20.11.25",
+    "@types/vscode": "^1.87.0",
+    "eslint": "^8.57.0",
+    "typescript": "5.2.2"
+  }
+}
