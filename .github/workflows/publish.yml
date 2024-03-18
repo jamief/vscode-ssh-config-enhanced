@@ -1,17 +1,16 @@
 on:
   push:
     branches:
-      - main
-
+      - master
+name: Deploy Extension
 jobs:
-  publish-extension:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Publish extension
-        id: publisher
-        uses: sigma/vsce-publish-action@v0.0.2
+      - uses: actions/checkout@v2
+      - run: npm install
+      - uses: lannonbr/vsce-action@master
         with:
-          vsce_token: ${{ secrets.VSCE_TOKEN }}
-          build_pkg: yes
-      - name: Process further
-        run: echo ${{ steps.publisher.outputs.vsix_path }}
+          args: "publish -p $VSCE_TOKEN"
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}

@@ -5,6 +5,7 @@ module.exports = antfu(
     stylistic: true,
     typescript: true,
     jsonc: false,
+    yaml: false,
     markdown: false,
     ignores: [
       '**/eslint.config.js',

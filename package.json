@@ -2,7 +2,7 @@
   "name": "vscode-ssh-config-enhanced",
   "displayName": "SSH Config Enhanced",
   "description": "SSH config editing enhanced, providing autocompletion, validation, include path intellisense and formatting",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publisher": "jamief",
   "icon": "images/icon.png",
   "license": "MIT",
@@ -38,21 +38,10 @@
     "ms-vscode-remote.remote-ssh"
   ],
   "contributes": {
-    "keybindings": [
-      {
-        "command": "extension.formatSshConfig",
-        "key": "alt+shift+f",
-        "when": "editorLangId == 'ssh_config' && editorTextFocus"
-      }
-    ],
     "commands": [
       {
         "command": "ssh.openUserConfig",
         "title": "SSH: Open User Configuration"
-      },
-      {
-        "command": "extension.formatSshConfig",
-        "title": "Format SSH Config"
       }
     ],
     "grammars": [

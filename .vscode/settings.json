@@ -1,5 +1,4 @@
 {
-  "npm.packageManager": "auto",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
@@ -8,6 +7,7 @@
   "eslint.enable": true,
   "eslint.experimental.useFlatConfig": true,
   "eslint.format.enable": true,
+  "eslint.onIgnoredFiles": "off",
   "eslint.quiet": false,
   "eslint.validate": [
     "javascript",
@@ -24,12 +24,11 @@
     "toml"
   ],
   "files.exclude": {
-    "out": false // set this to true to hide the "out" folder with the compiled JS files
+    "out": false
   },
+  "npm.packageManager": "auto",
   "search.exclude": {
-    "out": true // set this to false to include "out" folder in search results
+    "out": true
   },
-  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-  "typescript.tsc.autoDetect": "off",
-  "eslint.onIgnoredFiles": "off"
+  "typescript.tsc.autoDetect": "off"
 }
