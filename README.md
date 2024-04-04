@@ -10,11 +10,11 @@
 - Better syntax highlighting
 - Hover support: You can hover over a keyword to see a brief description of what it does
 - Works with the `ms-vscode-remote.remote-ssh-edit` extension
-- Formatting directives by 2 spaces after each Host and Match
+- Formatting directives by spaces configured via `vscode-ssh-config-enhanced.format.indentSize` setting after each Host and Match
 
 Formatting Example:
 ```properties
-Host jamief-rn
+Host jamief
 HostName ssh.example.com
 User jamief
 Port 22

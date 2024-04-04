@@ -6,19 +6,8 @@ import type {
   TextDocument,
   TextEdit,
 } from 'vscode'
-import { Range, languages, window } from 'vscode'
+import { Range, languages, window, workspace } from 'vscode'
 import { DOCUMENT_PROVIDER } from './utils'
-
-function stringDifference(str1: string, str2: string) {
-  let diff = ''
-  for (let i = 0; i < Math.max(str1.length, str2.length); i++) {
-    if (str1[i] !== str2[i]) {
-      diff += str1[i] || '' // Adds the character from str1 if it exists
-      diff += str2[i] || '' // Adds the character from str2 if it exists
-    }
-  }
-  return diff
-}
 
 /**
  * Provides formatting for SSH configuration documents.
@@ -39,12 +28,14 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
    */
   provideDocumentFormattingEdits(document: TextDocument, options: FormattingOptions): ProviderResult<TextEdit[]> {
     const editor = window.activeTextEditor
+    const indentSize = workspace.getConfiguration('vscode-ssh-config-enhanced.format').get('indentSize', 2)
+
     if (!editor) {
       return
     }
 
     const text = document.getText()
-    const formattedText = this.formatSshConfig(text)
+    const formattedText = this.formatSshConfig(text, indentSize)
 
     if (text === formattedText) {
       return
@@ -63,9 +54,11 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
   /**
    * Formats the SSH configuration text.
    * @param text - The SSH configuration text to be formatted.
+   * @param indentSize - The size of the indentation.
    * @returns The formatted SSH configuration text.
    */
-  private formatSshConfig(text: string): string {
+  private formatSshConfig(text: string, indentSize: number): string {
+    const customIndentation = ' '.repeat(indentSize)
     let isHostBlock = false
     let isFirstLine = true
     return text.split('\n').map((line, index, lines) => {
@@ -81,7 +74,7 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
         return line
       } else {
         isFirstLine = false
-        return isHostBlock ? `  ${line.trim()}` : line.trim()
+        return isHostBlock ? `${customIndentation}${line.trim()}` : line.trim()
       }
     }).join('\n')
   }

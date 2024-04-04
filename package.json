@@ -2,7 +2,7 @@
   "name": "vscode-ssh-config-enhanced",
   "displayName": "SSH Config Enhanced",
   "description": "SSH config editing enhanced, providing autocompletion, validation, include path intellisense and formatting",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "publisher": "jamief",
   "icon": "images/icon.png",
   "license": "MIT",
@@ -38,6 +38,16 @@
     "ms-vscode-remote.remote-ssh"
   ],
   "contributes": {
+    "configuration": {
+      "title": "SSH Config Enhanced",
+      "properties": {
+        "vscode-ssh-config-enhanced.format.indentSize": {
+          "type": "integer",
+          "default": 2,
+          "markdownDescription": "The number of spaces used for indentation"
+        }
+      }
+    },
     "commands": [
       {
         "command": "ssh.openUserConfig",
