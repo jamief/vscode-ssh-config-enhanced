@@ -2,7 +2,7 @@
   "name": "vscode-ssh-config-enhanced",
   "displayName": "SSH Config Enhanced",
   "description": "SSH config editing enhanced, providing autocompletion, validation, include path intellisense and formatting",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "jamief",
   "icon": "images/icon.png",
   "license": "MIT",
