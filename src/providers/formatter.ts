@@ -4,9 +4,8 @@ import type {
   FormattingOptions,
   ProviderResult,
   TextDocument,
-  TextEdit,
 } from 'vscode'
-import { Range, languages, window, workspace } from 'vscode'
+import { Range, TextEdit, languages, window, workspace } from 'vscode'
 import { DOCUMENT_PROVIDER } from './utils'
 
 /**
@@ -38,7 +37,7 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
     const formattedText = this.formatSshConfig(text, indentSize)
 
     if (text === formattedText) {
-      return
+      return []
     }
 
     const fullRange = new Range(
@@ -46,9 +45,7 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
       document.positionAt(text.length),
     )
 
-    editor.edit((editBuilder) => {
-      editBuilder.replace(fullRange, formattedText)
-    })
+    return [TextEdit.replace(fullRange, formattedText)]
   }
 
   /**
@@ -64,7 +61,11 @@ export class SSHFormatProvider implements DocumentFormattingEditProvider {
     return text.split('\n').map((line, index, lines) => {
       if (line.trim().startsWith('Host ') || line.trim().startsWith('Match ')) {
         isHostBlock = true
-        if (!isFirstLine && lines[index - 1].trim() !== '') {
+        if (
+          !isFirstLine &&
+          lines[index - 1].trim() !== '' &&
+          !lines[index - 1].trim().startsWith('#')
+        ) {
           return `\n${line.trim()}`
         }
         return line.trim()
